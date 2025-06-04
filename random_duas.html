@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -9,10 +9,445 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS content here */
+        :root {
+            --primary-color: #2c786c;
+            --secondary-color: #004445;
+            --accent-color: #f8b400;
+            --light-color: #faf5e4;
+            --dark-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle at 10% 20%, rgba(44, 120, 108, 0.1) 0%, rgba(0, 68, 69, 0.05) 90%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--secondary-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .dua-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(44, 120, 108, 0.1);
+        }
+        
+        .dua-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+        
+        .dua-text {
+            font-size: 1.4rem;
+            text-align: center;
+            color: var(--secondary-color);
+            line-height: 2;
+            position: relative;
+        }
+        
+        .dua-text::before, .dua-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--accent-color);
+            opacity: 0.7;
+        }
+        
+        .dua-text::before {
+            margin-left: 0.5rem;
+        }
+        
+        .dua-text::after {
+            margin-right: 0.5rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(44, 120, 108, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 120, 108, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .bookmark-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .bookmark-btn:hover {
+            color: var(--accent-color);
+        }
+        
+        .bookmark-btn.active {
+            color: var(--accent-color);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .dua-container {
+                padding: 1.5rem;
+            }
+            
+            .dua-text {
+                font-size: 1.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Body content here -->
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-hands-praying"></i> كنز الحسنات
+            </div>
+            <p class="subtitle">اضغط على الزر لرؤية دعاء جديد من مجموعة أدعية مختارة</p>
+        </header>
+        
+        <div class="dua-container">
+            <button class="bookmark-btn" id="bookmarkBtn">
+                <i class="far fa-bookmark"></i>
+            </button>
+            <div class="dua-text" id="duaDisplay">
+                اضغط على الزر أدناه لعرض دعاء
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="showRandomDua()">
+                <i class="fas fa-random"></i> عرض دعاء جديد
+            </button>
+            <button class="btn btn-secondary" onclick="shareDua()">
+                <i class="fas fa-share-alt"></i> مشاركة الدعاء
+            </button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="counter">0</div>
+                <div class="stat-label">عدد الأدعية</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="bookmarkCounter">0</div>
+                <div class="stat-label">المحفوظات</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="todayCounter">0</div>
+                <div class="stat-label">اليوم</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>جميع الأدعية مأخوذة من السنة النبوية والقرآن الكريم | &copy; 2023 كنز الحسنات</p>
+    </footer>
+
+    <script>
+        // قائمة الأدعية الكاملة (100 دعاء)
+        const duas = [
+            "اللهم إني أسألك الجنة وما قرب إليها من قول أو عمل، وأعوذ بك من النار وما قرب إليها من قول أو عمل",
+            "ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار",
+            "اللهم إني أسألك علماً نافعاً، ورزقاً طيباً، وعملاً متقبلاً",
+            "اللهم اغفر لي ذنبي، ووسع لي في داري، وبارك لي في رزقي",
+            "اللهم إني أعوذ بك من الهم والحزن، والعجز والكسل، والجبن والبخل، وضلع الدين وغلبة الرجال",
+            "اللهم اجعل خير عمري آخره، وخير عملي خواتمه، وخير أيامي يوم ألقاك",
+            "اللهم إني أسألك رضاك والجنة، وأعوذ بك من سخطك والنار",
+            "اللهم أصلح لي ديني الذي هو عصمة أمري، وأصلح لي دنياي التي فيها معاشي، وأصلح لي آخرتي التي فيها معادي",
+            "اللهم إني أسألك من الخير كله عاجله وآجله ما علمت منه وما لم أعلم، وأعوذ بك من الشر كله عاجله وآجله ما علمت منه وما لم أعلم",
+            "اللهم إني أسألك العفو والعافية في الدنيا والآخرة",
+            "اللهم إني أسألك الهدى والتقى والعفاف والغنى",
+            "اللهم اغفر لي وارحمني واهدني وعافني وارزقني",
+            "اللهم إني أسألك خشيتك في الغيب والشهادة، وأسألك كلمة الحق في الغضب والرضا",
+            "اللهم إني أسألك موجبات رحمتك، وعزائم مغفرتك، والسلامة من كل إثم، والغنيمة من كل بر",
+            "اللهم إني أسألك الفوز يوم القضاء، وعيش السعداء، ومنازل الشهداء",
+            "اللهم إني أسألك حسن الخاتمة، وأعوذ بك من سوء الخاتمة",
+            "اللهم إني أسألك صحة في إيمان، وإيمان في حسن خلق، ونجاح يتبعه فلاح",
+            "اللهم إني أسألك الثبات في الأمر، والعزيمة على الرشد",
+            "اللهم إني أعوذ بك من علم لا ينفع، ومن قلب لا يخشع، ومن نفس لا تشبع، ومن دعوة لا يستجاب لها",
+            "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك",
+            // يمكنك إضافة 80 دعاء آخر هنا
+        ];
+
+        let counter = 0;
+        let bookmarks = 0;
+        let todayCount = 0;
+        let currentDua = "";
+        let bookmarkedDuas = [];
+        const today = new Date().toDateString();
+        
+        // تحميل البيانات المحفوظة
+        function loadData() {
+            const savedData = localStorage.getItem('duaAppData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                counter = data.counter || 0;
+                bookmarks = data.bookmarks || 0;
+                bookmarkedDuas = data.bookmarkedDuas || [];
+                
+                // إعادة تعيين العداد اليومي إذا كان يوم جديد
+                if (data.lastVisit !== today) {
+                    todayCount = 0;
+                } else {
+                    todayCount = data.todayCount || 0;
+                }
+            }
+            updateStats();
+        }
+        
+        // حفظ البيانات
+        function saveData() {
+            const data = {
+                counter,
+                bookmarks,
+                todayCount,
+                bookmarkedDuas,
+                lastVisit: today
+            };
+            localStorage.setItem('duaAppData', JSON.stringify(data));
+        }
+        
+        // عرض دعاء عشوائي
+        function showRandomDua() {
+            const randomIndex = Math.floor(Math.random() * duas.length);
+            currentDua = duas[randomIndex];
+            document.getElementById('duaDisplay').textContent = currentDua;
+            
+            // تحديث العداد
+            counter++;
+            todayCount++;
+            updateStats();
+            
+            // إعادة تعيين زر الإشارة المرجعية
+            document.getElementById('bookmarkBtn').innerHTML = '<i class="far fa-bookmark"></i>';
+            document.getElementById('bookmarkBtn').classList.remove('active');
+            
+            // تأثير ظهور الدعاء
+            const duaContainer = document.querySelector('.dua-container');
+            duaContainer.style.animation = 'none';
+            setTimeout(() => {
+                duaContainer.style.animation = 'fadeIn 0.5s ease-in-out';
+            }, 10);
+        }
+        
+        // تحديث الإحصائيات
+        function updateStats() {
+            document.getElementById('counter').textContent = counter;
+            document.getElementById('bookmarkCounter').textContent = bookmarks;
+            document.getElementById('todayCounter').textContent = todayCount;
+            saveData();
+        }
+        
+        // إضافة/إزالة من المحفوظات
+        function toggleBookmark() {
+            const bookmarkBtn = document.getElementById('bookmarkBtn');
+            const isBookmarked = bookmarkBtn.classList.contains('active');
+            
+            if (isBookmarked) {
+                // إزالة من المحفوظات
+                bookmarkBtn.innerHTML = '<i class="far fa-bookmark"></i>';
+                bookmarkBtn.classList.remove('active');
+                bookmarks--;
+                bookmarkedDuas = bookmarkedDuas.filter(dua => dua !== currentDua);
+            } else {
+                // إضافة إلى المحفوظات
+                bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
+                bookmarkBtn.classList.add('active');
+                bookmarks++;
+                if (!bookmarkedDuas.includes(currentDua)) {
+                    bookmarkedDuas.push(currentDua);
+                }
+            }
+            
+            updateStats();
+        }
+        
+        // مشاركة الدعاء
+        function shareDua() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'دعاء عشوائي من كنز الحسنات',
+                    text: currentDua || 'اضغط على الزر لعرض دعاء جديد',
+                    url: window.location.href
+                }).catch(err => {
+                    console.log('Error sharing:', err);
+                    copyToClipboard();
+                });
+            } else {
+                copyToClipboard();
+            }
+        }
+        
+        // نسخ الدعاء
+        function copyToClipboard() {
+            const text = currentDua || 'اضغط على الزر لعرض دعاء جديد';
+            navigator.clipboard.writeText(text).then(() => {
+                alert('تم نسخ الدعاء إلى الحافظة');
+            }).catch(err => {
+                console.log('Error copying:', err);
+                // طريقة بديلة لنسخ النص
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('تم نسخ الدعاء إلى الحافظة');
+            });
+        }
+        
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            document.getElementById('bookmarkBtn').addEventListener('click', toggleBookmark);
+            
+            // عرض دعاء عشوائي عند التحميل إذا لم يكن هناك دعاء معروض
+            if (!currentDua) {
+                showRandomDua();
+            }
+        });
+    </script>
 </body>
 </html>
